@@ -1,0 +1,18 @@
+2023/01/28-19:35:14.425 17dc Reusing MANIFEST C:\Users\moothz\Documents\GitHub\garrusbot\.wwebjs_auth\session-garrus_bot\Default\Local Storage\leveldb/MANIFEST-000001
+2023/01/28-19:35:14.425 17dc Recovering log #10
+2023/01/28-19:35:14.426 17dc Reusing old log C:\Users\moothz\Documents\GitHub\garrusbot\.wwebjs_auth\session-garrus_bot\Default\Local Storage\leveldb/000010.log 
+2023/01/28-23:52:55.529 3738 Level-0 table #14: started
+2023/01/28-23:52:55.536 3738 Level-0 table #14: 14099 bytes OK
+2023/01/28-23:52:55.541 3738 Delete type=0 #10
+2023/01/29-08:05:53.894 465c Level-0 table #16: started
+2023/01/29-08:05:53.902 465c Level-0 table #16: 15274 bytes OK
+2023/01/29-08:05:53.904 465c Delete type=0 #13
+2023/01/29-08:05:53.904 465c Compacting 4@0 + 1@1 files
+2023/01/29-08:05:53.912 465c Generated table #17@0: 66 keys, 2773 bytes
+2023/01/29-08:05:53.912 465c Compacted 4@0 + 1@1 files => 2773 bytes
+2023/01/29-08:05:53.913 465c compacted to: files[ 0 1 1 0 0 0 0 ]
+2023/01/29-08:05:53.914 465c Delete type=2 #7
+2023/01/29-08:05:53.914 465c Delete type=2 #9
+2023/01/29-08:05:53.914 465c Delete type=2 #11
+2023/01/29-08:05:53.914 465c Delete type=2 #14
+2023/01/29-08:05:53.914 465c Delete type=2 #16

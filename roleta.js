@@ -7,6 +7,21 @@ var ultimosTiros = {};
 var estatisticasRoleta = {};
 let mortosAtuais = {};
 const pessoasAvisadas = [];
+var optsRoletaRussa = {
+	"tempoFora": 30,
+	"permiteTirosConsecutivos": true,
+	"tempoAguardarAdd": 60,
+	"tempoAntesRemover": 3
+};
+
+function setNomePessoa(novoNome,numeroVitima,idGrupo){	
+	// Achei a pessoa, zera tiro e add morte
+	if(estatisticasRoleta[idGrupo][numeroVitima]){
+		console.log(`[setNomePessoa] Alterando de '${estatisticasRoleta[idGrupo][numeroVitima].nome}' para '${novoNome}'`);
+		estatisticasRoleta[idGrupo][numeroVitima].nome = novoNome;
+	}
+	saveDbRoleta();
+}
 
 function isMemberIDInGroup(membro,grupo){
 	let numeroMembro = membro;
@@ -25,28 +40,40 @@ function isMemberIDInGroup(membro,grupo){
 }
 
 function isUserAdminById(idContato,infoGrupo){
-	let membros = infoGrupo.participants;
 	let isAdmin = false;
-	idContato = idContato.replace("@c.us","");
-	membros.forEach((membro) => {
-		if(membro.id.user.includes(idContato)){
-			if(membro.isAdmin === true){
-				isAdmin = true;
+	if(idContato && infoGrupo){
+		let membros = infoGrupo.participants;
+		idContato = idContato.replace("@c.us","");
+		membros.forEach((membro) => {
+			if(membro.id.user.includes(idContato)){
+				if(membro.isAdmin === true){
+					isAdmin = true;
+				}
 			}
-		}
-	});
+		});
+	} else {
+		console.log(`[isUserAdminById] Erro, algum dos dados indefinidos.`,idContato,infoGrupo);
+	}
+
 	return isAdmin;
 }
 
 function inicializaRoleta(client){
-	const data = fs.readFileSync(configs.roletaRussa.arquivoDados, "utf8");
-	estatisticasRoleta = JSON.parse(data);
+	const dataEst = fs.readFileSync(configs.roletaRussa.arquivoDados, "utf8");
+	const dataOpt = fs.readFileSync(configs.roletaRussa.arquivoOpcoes, "utf8");
+	estatisticasRoleta = JSON.parse(dataEst);
+	optsRoletaRussa = JSON.parse(dataOpt);
 	clientBot = client;
 	console.log("[roletaRussa] Inicializada.");
 }
 
+function saveOptRoleta(){
+	const data = JSON.stringify(optsRoletaRussa);
+	fs.writeFileSync(configs.roletaRussa.arquivoOpcoes, data);
+}
+
 function saveDbRoleta(){
-	let data = JSON.stringify(estatisticasRoleta, null, 2);
+	const data = JSON.stringify(estatisticasRoleta);
 	fs.writeFileSync(configs.roletaRussa.arquivoDados, data);
 }
 
@@ -189,7 +216,7 @@ function marcaTiro(numeroVitima,nomeVitima,idGrupo){
 		estatisticasRoleta[idGrupo][numeroVitima].qtdMaximaTentativas = estatisticasRoleta[idGrupo][numeroVitima].qtdTentativasAtual;
 	}
 
-	return configs.roletaRussa.permiteTirosConsecutivos ? false : repetido;
+	return optsRoletaRussa.permiteTirosConsecutivos ? false : repetido;
 }
 
 function marcaUltimoTiro(numeroVitima,idGrupo){
@@ -205,7 +232,7 @@ function marcaUltimoTiro(numeroVitima,idGrupo){
 
 	// Atualiza tiro mais recente
 	ultimosTiros[idGrupo] = {pessoa: numeroVitima, qtd: qtdTentativasSeguidas};
-	return configs.roletaRussa.permiteTirosConsecutivos ? false : tiroRepetido;
+	return optsRoletaRussa.permiteTirosConsecutivos ? false : tiroRepetido;
 }
 
 function isMensagemRepetida(numeroVitima,idGrupo){
@@ -221,9 +248,14 @@ function isMensagemRepetida(numeroVitima,idGrupo){
 async function processaRoletaRussa(nomeVitima,numeroVitima,grupo){
 	const idGrupo = grupo.id._serialized;
 	let resultado = [];
-	console.log(`[roletaRussa] Rolando para '${numeroVitima}/${nomeVitima}'`);
 	const tiroRepetido = marcaTiro(numeroVitima,nomeVitima,idGrupo);
 
+	// Ignora msg de quem tá morto
+	if(mortosAtuais[numeroVitima]){
+		console.log(`[roletaRussa] Já tá morto! Ignorando: '${numeroVitima}/${nomeVitima}'`);
+		return resultado;
+	}
+	console.log(`[roletaRussa] Rolando para '${numeroVitima}/${nomeVitima}'`);
 	if(tiroRepetido){
 		console.log(`[roletaRussa] Tiro repetido. '${numeroVitima}/${nomeVitima}/${grupo.name}'`);
 		if(!isMensagemRepetida(numeroVitima,idGrupo)){
@@ -234,8 +266,8 @@ async function processaRoletaRussa(nomeVitima,numeroVitima,grupo){
 		if((Math.random() < 0.17)){
 			let eraAdmin = isUserAdminById(numeroVitima,grupo);
 
-			console.log(`[roletaRussa] Bang! Removendo: '${numeroVitima}/${nomeVitima}' de '${grupo.name}' (admin: ${eraAdmin}) (tempo: ${configs.roletaRussa.tempoFora})`);
-			resultado.push({msg: `💥🔫 *BANG* - _F no chat_${getEstatisticasTentativa(numeroVitima,idGrupo)}\n\`\`\`últimas palavras? (${configs.roletaRussa.tempoAntesRemover}s)\`\`\``, react: "☠️", reply: true});
+			console.log(`[roletaRussa] Bang! Removendo: '${numeroVitima}/${nomeVitima}' de '${grupo.name}' (admin: ${eraAdmin}) (tempo: ${optsRoletaRussa.tempoFora})`);
+			resultado.push({msg: `💥🔫 *BANG* - _F no chat_${getEstatisticasTentativa(numeroVitima,idGrupo)}\n\`\`\`últimas palavras? (${optsRoletaRussa.tempoAntesRemover}s)\`\`\``, react: "☠️", reply: true});
 			marcaMorte(numeroVitima,idGrupo);
 
 			// Coloca na lista de mortos pra reviver automaticamente quando o bot precisa reiniciar
@@ -244,7 +276,7 @@ async function processaRoletaRussa(nomeVitima,numeroVitima,grupo){
 			if(isUserAdminById(configs.meuNumero,grupo)){
 				setTimeout(()=>{
 					removerPessoasGrupo(grupo,numeroVitima);
-				},1000*configs.roletaRussa.tempoAntesRemover);
+				},1000*optsRoletaRussa.tempoAntesRemover);
 
 				setTimeout(()=>{
 					console.log(`[roletaRussa] Colocando de volta: '${numeroVitima}/${nomeVitima}' em '${grupo.name}'`);
@@ -287,14 +319,14 @@ async function processaRoletaRussa(nomeVitima,numeroVitima,grupo){
 											console.log(`[roletaRussa][segunda chance] Concedido admin de volta: '${numeroVitima}/${nomeVitima}' em '${grupoAtualizado.name}'`);
 											tornarPessoasAdmin(grupoAtualizado,numeroVitima);
 										}
-									}, configs.roletaRussa.tempoAguardarAdd);
-								}, configs.roletaRussa.tempoAguardarAdd);
+									}, 1000*optsRoletaRussa.tempoAguardarAdd);
+								}, 1000*optsRoletaRussa.tempoAguardarAdd);
 							}
 						} catch(e){
 							console.warn(`[roletaRussa] Erro Verificando pós-add`, e);
 						}
-					}, configs.roletaRussa.tempoAguardarAdd);
-				}, 1000*configs.roletaRussa.tempoFora);
+					}, 1000*optsRoletaRussa.tempoAguardarAdd);
+				}, 1000*optsRoletaRussa.tempoFora);
 			} else {
 				console.log(`[roletaRussa] Não sou admin, então não posso remover a pessoa do grupo.`)
 				resultado.push({msg: `⚠️ \`\`\`Preciso ser administrador para conseguir remover a pessoa do grupo.\`\`\``, reply: true});
@@ -311,4 +343,4 @@ async function processaRoletaRussa(nomeVitima,numeroVitima,grupo){
 	return resultado;
 }
 
-module.exports = { inicializaRoleta, processaRoletaRussa, getRankingRoleta, resetRankingRoleta, ressuscitaTodos, getQtdMortos };
+module.exports = { inicializaRoleta, processaRoletaRussa, getRankingRoleta, resetRankingRoleta, ressuscitaTodos, getQtdMortos, setNomePessoa };
