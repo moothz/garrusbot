@@ -62,4 +62,5 @@ node index.js
 ```
 
 Quando solicitado, escaneie o `QRCode` apresentado no terminal ou no arquivo `logar.png`.
+
 O arquivo `iniciar-bot.bat` serve para reiniciar o bot quando acontecer algum erro inesperado (solução simples).
