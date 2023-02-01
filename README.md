@@ -5,7 +5,7 @@
 Este é um bot de joguinhos para WhatsApp que utiliza a biblioteca [whatsapp-web.js](https://github.com/pedroslopez/whatsapp-web.js).
 Na versão atual, está implementada apenas a **!roletarussa**.
 
-## Quais as funções planejadas?
+## Quais as funções planejadas pro futuro?
 
 * **Jokenpo**: Pedra, papel e tesoura contra o bot
 * **Comandos de zueira** do legion bot (!tinder, !pinto, etc.)
@@ -27,7 +27,7 @@ sudo apt install -y nodejs
 
 ### Instalar node (Windows)
 
-Acesse o [site oficial do nodejs](https://nodejs.org/), baixe e instale a última versão.
+	Acesse o [site oficial do nodejs](https://nodejs.org/), baixe e instale a última versão.
 
 
 ### Instalar pacotes necessários
