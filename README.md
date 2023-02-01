@@ -12,7 +12,7 @@ Na versão atual, está implementada apenas a **!roletarussa**.
 
 ## Requisitos
 
-* **Servidor** que irá hospedar o bot, Windows ou Linux. Ele não precisa de muito pra rodar, até um _Raspberry Pi_ serve!
+* **Servidor** que irá hospedar o bot, _Windows_ ou _Linux_, capaz de rodar _nodejs_. Ele não precisa de muito pra rodar, até um _Raspberry Pi_ serve!
 * **WhatsApp** conectado em algum número. Você irá escanear um QRCode em "Dispositivos Conectados". _Não use seu número_, compre um chip só pra isso e habilite-o usando um _Dual Messenger/coisa parecida_ ou em outro celular. Bots _não são_ permitidos no WhatsApp e você **SERÁ** banido.
 
 ## Instruções
@@ -46,7 +46,7 @@ const meuNumero = "555598765432";	// O número do chip (o mesmo que aparece no c
 
 Edite o arquivo `roleta-opcoes.json` conforme achar melhor:
 
-```json
+```js
 {
 	"tempoFora": 120,					// Tempo, em segundos, que a pessoa irá ficar fora do grupo após perder
 	"permiteTirosConsecutivos": true,	// Permite que a pessoa tente várias vezes em sequencia
