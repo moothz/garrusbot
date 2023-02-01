@@ -8,6 +8,7 @@ Na versão atual, está implementada apenas a **!roletarussa**.
 ## Quais as funções planejadas pro futuro?
 
 * **Jokenpo**: Pedra, papel e tesoura contra o bot
+* **!timeout** e **!ban**: Vou deixar nesse bot os 2 comandos que desativei no legionbot
 * **Comandos de zueira** do legion bot (!tinder, !pinto, etc.)
 
 ## Requisitos
