@@ -27,7 +27,7 @@ sudo apt install -y nodejs
 
 ### Instalar node (Windows)
 
-	Acesse o [site oficial do nodejs](https://nodejs.org/), baixe e instale a última versão.
+	Acesse o site oficial do nodejs (https://nodejs.org/), baixe e instale a última versão.
 
 
 ### Instalar pacotes necessários
