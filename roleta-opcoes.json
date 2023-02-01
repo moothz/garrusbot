@@ -1,6 +1,6 @@
 {
 	"tempoFora": 120,
 	"permiteTirosConsecutivos": true,
-	"tempoAguardarAdd": 60,
-	"tempoAntesRemover": 10
+	"tempoAntesRemover": 10,
+	"tempoAguardarAdd": 60
 }
