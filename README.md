@@ -21,32 +21,32 @@ Na versão atual, está implementada apenas a **!roletarussa**.
 Instalar [node.js](https://nodejs.org/) e requisitos:
 
 ### 1. Instalar node
-	1. Ubuntu, debian
+1. Ubuntu, debian
 ```sh
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 sudo apt install -y nodejs
 ```
 
-	2. Instalar node (Windows)
+2. Instalar node (Windows)
 
 	Acesse o site oficial do nodejs (https://nodejs.org/), baixe e instale a versão LTS.
 
 
 ### 2. Instalar pacotes necessários
 
-	1. Baixe/clone este repositório e em um terminal na mesma pasta, execute:
+1. Baixe/clone este repositório e em um terminal na mesma pasta, execute:
 
 ```sh
 npm i whatsapp-web.js qrcode-terminal qr-image
 ```
 
-	2. Edite o arquivo `configs.js` com o número do chip
+2. Edite o arquivo `configs.js` com o número do chip
 
 ```js
 const meuNumero = "555598765432";	// O número do chip (o mesmo que aparece no contato do whatsapp)
 ```
 
-	3. Edite o arquivo `roleta-opcoes.json` conforme achar melhor:
+3. Edite o arquivo `roleta-opcoes.json` conforme achar melhor:
 
 ```js
 {
@@ -59,11 +59,11 @@ const meuNumero = "555598765432";	// O número do chip (o mesmo que aparece no c
 
 ### 3. Executar o bot
 
-	1. Ainda no mesmo diretório execute:
+1. Ainda no mesmo diretório execute:
 ```sh
 node index.js
 ```
 
-	2. Quando solicitado, escaneie o `QRCode` apresentado no terminal ou no arquivo `logar.png`.
+2. Quando solicitado, escaneie o `QRCode` apresentado no terminal ou no arquivo `logar.png`.
 
-	3. _Opcional:_ O arquivo `iniciar-bot.bat` serve para reiniciar o bot quando acontecer algum erro inesperado (solução simples).
+3. _Opcional:_ O arquivo `iniciar-bot.bat` serve para reiniciar o bot quando acontecer algum erro inesperado (solução simples).
