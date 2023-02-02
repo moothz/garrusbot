@@ -5,7 +5,7 @@ Um bot de joguinhos para WhatsApp que utiliza a biblioteca [whatsapp-web.js](htt
 Tudo que está aqui são funções que foram retiradas do bot principal, o _legionbot_.
 ## Lista de Comandos
 
-No momento atual, esta são as funções pretendidas/implementadas no escopo do _garrusbot_:
+No momento atual, estas são as funções pretendidas/implementadas do _garrusbot_:
 - [X] **!roletarussa**: Roda a roleta, 1 em 6 chances de ser removido do grupo (o bot readiciona automaticamente após o tempo configurado)
 - [ ] **!jokenpo**: Pedra, papel e tesoura contra o bot
 - [ ] **!timeout** _n_ _@pessoa1 @pessoa2_:  Remove por _n_ segundos pessoas mencionadas na mensagem
