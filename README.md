@@ -2,9 +2,8 @@
 # 🤖 garrusbot - jogos do zap
 
 Um bot de joguinhos para WhatsApp que utiliza a biblioteca [whatsapp-web.js](https://github.com/pedroslopez/whatsapp-web.js)!
-
+Tudo que está aqui são funções que foram retiradas do bot principal, o _legionbot_.
 ## Lista de Comandos
-Essa é a lista de comandos planejados para o bot, são funções que foram removidas do bot principal, o _legionbot_. Aos poucos estarei atualizando este repositório com novas funções.
 
 No momento atual, esta são as funções pretendidas/implementadas no escopo do _garrusbot_:
 - [X] **!roletarussa**: Roda a roleta, 1 em 6 chances de ser removido do grupo (o bot readiciona automaticamente após o tempo configurado)
