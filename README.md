@@ -30,9 +30,9 @@ $ sudo apt install -y nodejs
 ### 2. Instalar pacotes necessários
 
 1. Baixe/clone este repositório
-2. Em um terminal na mesma pasta, execute:
+2. Em um terminal na mesma pasta, execute para instalar os requisitos:
 ```sh
-npm i whatsapp-web.js qrcode-terminal qr-image
+npm i
 ```
 3. Edite o arquivo `configs.js`, alterando `meuNumero` com o número do seu chip.
 ```js
